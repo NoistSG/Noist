@@ -264,17 +264,17 @@ function redirectToWhatsApp() {
   const address = encodeURIComponent(document.getElementById('address').value);
   const grandTotal = encodeURIComponent(document.getElementById('grandTotal').textContent);
 
-  // Build message with clear formatting
-  let message = `📝 *Order Details:*\n`;
-  message += `\n*Name:* ${decodeURIComponent(name)}\n`;
-  message += `*Mobile:* ${decodeURIComponent(mobile)}\n`;
-  message += `*Email:* ${decodeURIComponent(email)}\n`;
-  message += `*Delivery Method:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Self Pickup'}\n`;
-  if (deliveryMethod === 'delivery') {
-    message += `*Address:* ${decodeURIComponent(address)}\n`;
-  }
-  message += `*Grand Total:* $${decodeURIComponent(grandTotal)}\n`;
-  message += `\nPlease send the payment screenshot via WhatsApp.`;
+ // Build message in plain text
+let message = `Order Details:\n`;
+message += `Name: ${decodeURIComponent(name)}\n`;
+message += `Mobile: ${decodeURIComponent(mobile)}\n`;
+message += `Email: ${decodeURIComponent(email)}\n`;
+message += `Delivery Method: ${deliveryMethod === 'delivery' ? 'Delivery' : 'Self Pickup'}\n`;
+if (deliveryMethod === 'delivery') {
+  message += `Address: ${decodeURIComponent(address)}\n`;
+}
+message += `Grand Total: $${decodeURIComponent(grandTotal)}\n`;
+message += `Please send the payment screenshot via WhatsApp.`;
 
   // WhatsApp link
   const phoneNumber = '+6581942742'; // your WhatsApp number
