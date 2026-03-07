@@ -252,19 +252,70 @@ function updateTotal() {
   document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
 }
 
+<button class="submit-btn" onclick="redirectToWhatsApp()">Confirm Order</button>
+
+<script>
+function updateTotal() {
+  let grandTotal = 0;
+
+  // Calculate totals for each item category
+  document.querySelectorAll('.lasagna-beef').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    const price = parseFloat(input.dataset.price);
+    const totalCell = input.parentElement.nextElementSibling;
+    const totalPrice = qty * price;
+    totalCell.textContent = "$" + totalPrice.toFixed(2);
+  });
+  document.querySelectorAll('.lasagna-chicken').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    const price = parseFloat(input.dataset.price);
+    const totalCell = input.parentElement.nextElementSibling;
+    const totalPrice = qty * price;
+    totalCell.textContent = "$" + totalPrice.toFixed(2);
+  });
+  document.querySelectorAll('.brownie').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    const price = parseFloat(input.dataset.price);
+    const totalCell = input.parentElement.nextElementSibling;
+    const totalPrice = qty * price;
+    totalCell.textContent = "$" + totalPrice.toFixed(2);
+  });
+  document.querySelectorAll('.banana').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    const price = parseFloat(input.dataset.price);
+    const totalCell = input.parentElement.nextElementSibling;
+    const totalPrice = qty * price;
+    totalCell.textContent = "$" + totalPrice.toFixed(2);
+  });
+
+  // Sum all totals
+  document.querySelectorAll('.total-beef, .total-chicken, .total-brownie, .total-banana').forEach(td => {
+    const text = td.textContent.replace('$', '');
+    grandTotal += parseFloat(text) || 0;
+  });
+
+  // Add delivery charge if delivery selected
+  const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+  if (deliveryMethod === 'delivery') {
+    grandTotal += 10;
+  }
+
+  document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+}
+
 function redirectToWhatsApp() {
-  // First, update totals
+  // Update totals before preparing message
   updateTotal();
 
-  // Collect customer info
+  // Gather customer info
   const name = encodeURIComponent(document.getElementById('customerName').value);
   const mobile = encodeURIComponent(document.getElementById('mobile').value);
   const email = encodeURIComponent(document.getElementById('email').value);
   const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
   const address = encodeURIComponent(document.getElementById('address').value);
-  const grandTotal = encodeURIComponent(document.getElementById('grandTotal').textContent);
+  const grandTotal = document.getElementById('grandTotal').textContent;
 
-  // Build message in plain text
+  // Build message
   let message = `Order Details:\n`;
   message += `Name: ${decodeURIComponent(name)}\n`;
   message += `Mobile: ${decodeURIComponent(mobile)}\n`;
@@ -273,18 +324,16 @@ function redirectToWhatsApp() {
   if (deliveryMethod === 'delivery') {
     message += `Address: ${decodeURIComponent(address)}\n`;
   }
-  message += `Grand Total: $${decodeURIComponent(grandTotal)}\n`;
+  message += `Grand Total: $${grandTotal}\n`;
   message += `Please send the payment screenshot via WhatsApp.`;
 
-  // Your WhatsApp number (remove '+' if needed)
+  // Your WhatsApp number (remove '+' for wa.me)
   const phoneNumber = '6581942742';
 
-  // Encode message for URL
+  // Create WhatsApp URL
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-  // Debug: Log URL to console
-  console.log(whatsappUrl);
-
-  // Redirect to WhatsApp
+  // Redirect immediately
   window.location.href = whatsappUrl;
 }
+</script>
