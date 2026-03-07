@@ -165,17 +165,17 @@
       <h4>Lasagna - Beef</h4>
       <label>
         Personal ($18):
-        <input type="number" name="lasagna_beef_personal" min="0" value="0">
+        <input type="number" name="lasagna_beef_personal" min="0" value="0" class="qty">
         <span class="price">($18 each)</span>
       </label>
       <label>
         Sharing ($30):
-        <input type="number" name="lasagna_beef_sharing" min="0" value="0">
+        <input type="number" name="lasagna_beef_sharing" min="0" value="0" class="qty">
         <span class="price">($30 each)</span>
       </label>
       <label>
         Party ($90):
-        <input type="number" name="lasagna_beef_party" min="0" value="0">
+        <input type="number" name="lasagna_beef_party" min="0" value="0" class="qty">
         <span class="price">($90 each)</span>
       </label>
     </div>
@@ -185,17 +185,17 @@
       <h4>Lasagna - Chicken</h4>
       <label>
         Personal ($16):
-        <input type="number" name="lasagna_chicken_personal" min="0" value="0">
+        <input type="number" name="lasagna_chicken_personal" min="0" value="0" class="qty">
         <span class="price">($16 each)</span>
       </label>
       <label>
         Sharing ($28):
-        <input type="number" name="lasagna_chicken_sharing" min="0" value="0">
+        <input type="number" name="lasagna_chicken_sharing" min="0" value="0" class="qty">
         <span class="price">($28 each)</span>
       </label>
       <label>
         Party ($85):
-        <input type="number" name="lasagna_chicken_party" min="0" value="0">
+        <input type="number" name="lasagna_chicken_party" min="0" value="0" class="qty">
         <span class="price">($85 each)</span>
       </label>
     </div>
@@ -205,27 +205,27 @@
       <h4>Brownies</h4>
       <label>
         9 inch ($35):
-        <input type="number" name="brownie_9inch" min="0" value="0">
+        <input type="number" name="brownie_9inch" min="0" value="0" class="qty">
         <span class="price">($35)</span>
       </label>
       <label>
         9 inch Nutella ($38):
-        <input type="number" name="brownie_nutella" min="0" value="0">
+        <input type="number" name="brownie_nutella" min="0" value="0" class="qty">
         <span class="price">($38)</span>
       </label>
       <label>
         Personal ($6):
-        <input type="number" name="personal_brownie" min="0" value="0">
+        <input type="number" name="personal_brownie" min="0" value="0" class="qty">
         <span class="price">($6)</span>
       </label>
       <label>
         Personal Nutella ($7):
-        <input type="number" name="personal_brownie_nutella" min="0" value="0">
+        <input type="number" name="personal_brownie_nutella" min="0" value="0" class="qty">
         <span class="price">($7)</span>
       </label>
       <label>
         Brownie Bites ($25 per bottle):
-        <input type="number" name="brownie_bites" min="0" value="0">
+        <input type="number" name="brownie_bites" min="0" value="0" class="qty">
         <span class="price">($25)</span>
       </label>
     </div>
@@ -235,22 +235,22 @@
       <h4>Banana Cake</h4>
       <label>
         9 inch ($30):
-        <input type="number" name="banana_9inch" min="0" value="0">
+        <input type="number" name="banana_9inch" min="0" value="0" class="qty">
         <span class="price">($30)</span>
       </label>
       <label>
         9 inch Chocolate ($33):
-        <input type="number" name="banana_chocolate" min="0" value="0">
+        <input type="number" name="banana_chocolate" min="0" value="0" class="qty">
         <span class="price">($33)</span>
       </label>
       <label>
         Personal Banana Cake ($5):
-        <input type="number" name="personal_banana" min="0" value="0">
+        <input type="number" name="personal_banana" min="0" value="0" class="qty">
         <span class="price">($5)</span>
       </label>
       <label>
         Personal Banana Cake Chocolate ($6):
-        <input type="number" name="personal_banana_chocolate" min="0" value="0">
+        <input type="number" name="personal_banana_chocolate" min="0" value="0" class="qty">
         <span class="price">($6)</span>
       </label>
     </div>
@@ -291,6 +291,11 @@
     <p>Scan the QR code above to pay via PayNow.</p>
   </div>
 
+  <!-- Grand Total display -->
+  <div class="section" style="text-align: center;">
+    <h3>Grand Total: <span id="grandTotal">$0.00</span></h3>
+  </div>
+
   <!-- Submit Button -->
   <div style="text-align:center;">
     <input type="submit" value="Submit Order" />
@@ -316,6 +321,53 @@
   pickupRadio.addEventListener('change', toggleAddress);
   // Initialize
   toggleAddress();
+
+  // Prices for products
+  const prices = {
+    lasagna_beef_personal: 18,
+    lasagna_beef_sharing: 30,
+    lasagna_beef_party: 90,
+    lasagna_chicken_personal: 16,
+    lasagna_chicken_sharing: 28,
+    lasagna_chicken_party: 85,
+    brownie_9inch: 35,
+    brownie_nutella: 38,
+    personal_brownie: 6,
+    personal_brownie_nutella: 7,
+    brownie_bites: 25,
+    banana_9inch: 30,
+    banana_chocolate: 33,
+    personal_banana: 5,
+    personal_banana_chocolate: 6
+  };
+
+  // Function to calculate total
+  function calculateTotal() {
+    let total = 0;
+
+    for (const [key, price] of Object.entries(prices)) {
+      const qty = parseInt(document.querySelector(`input[name="${key}"]`).value) || 0;
+      total += qty * price;
+    }
+
+    // Add delivery fee if selected
+    const deliverySelected = document.querySelector('input[name="collection_method"]:checked').value === 'delivery';
+    if (deliverySelected) {
+      total += 10; // delivery fee
+    }
+
+    // Update grand total display
+    document.getElementById('grandTotal').textContent = `$${total.toFixed(2)}`;
+  }
+
+  // Attach event listeners to all quantity inputs
+  const inputs = document.querySelectorAll('input[type=number]');
+  inputs.forEach(input => {
+    input.addEventListener('input', calculateTotal);
+  });
+
+  // Trigger calculation on page load
+  window.onload = calculateTotal;
 </script>
 
 </body>
