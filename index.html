@@ -5,13 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Order Form</title>
 <style>
-  /* Basic styling for clarity */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f0e1; /* Light brown background */
+    color: #000; /* Black text for readability */
+    padding: 20px;
+  }
+
+  h1, h2, h3 {
+    color: #bfa14d; /* Gold-like color for headings */
+  }
+
+  /* Style labels and inputs for a cohesive look */
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input[type="number"], input[type="text"] {
+    padding: 5px 10px;
+    border: 2px solid #bfa14d; /* Gold border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+  /* Style for radio buttons and labels */
+  input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  /* Style the delivery address section */
   #delivery_address {
     display: none;
     margin-top: 10px;
+    padding: 10px;
+    background-color: #fff8f0; /* Slightly lighter background for contrast */
+    border: 2px solid #bfa14d; /* Gold border */
+    border-radius: 8px;
   }
+
+  /* Style total display */
+  #grandTotal {
+    font-size: 24px;
+    font-weight: bold;
+    color: #bfa14d; /* Gold color for total */
+  }
+
+  /* Style submit button */
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #bfa14d; /* Gold button */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: #a0843f; /* Slightly darker gold on hover */
+  }
+
+  /* Optional: style for product blocks */
   .product {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 </style>
 </head>
@@ -27,8 +87,8 @@
 <!-- Delivery Address -->
 <div id="delivery_address">
   <h3>Delivery Address</h3>
-  <label>Street: <input type="text" name="street" /></label><br />
-  <label>City: <input type="text" name="city" /></label><br />
+  <label>Street: <input type="text" name="street" /></label>
+  <label>City: <input type="text" name="city" /></label>
   <label>Zip Code: <input type="text" name="zip" /></label>
 </div>
 
@@ -117,7 +177,6 @@
 <!-- Submit Button -->
 <button type="button" onclick="alert('Order submitted!')">Submit Order</button>
 
-<!-- JavaScript -->
 <script>
   // Show or hide delivery address based on selection
   const deliveryRadio = document.querySelector('input[value="delivery"]');
