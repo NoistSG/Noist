@@ -12,91 +12,127 @@
     background-color: #f9f9f9;
     color: #333;
   }
+
   h1, h2 {
     text-align: center;
     color: #2c3e50;
+    margin-bottom: 10px;
   }
+
   form {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    font-size: 1em;
   }
+
   .section {
     margin-bottom: 25px;
   }
+
   h3 {
     background-color: #2980b9;
     color: #fff;
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
     margin-top: 0;
+    font-size: 1.2em;
   }
+
   label {
     display: block;
-    margin-top: 10px;
+    margin-top: 12px;
     font-weight: bold;
+    font-size: 1em;
   }
+
   input[type=text], input[type=email], textarea {
     width: 100%;
-    padding: 8px;
-    margin-top: 4px;
+    padding: 10px;
+    margin-top: 6px;
     box-sizing: border-box;
     border-radius: 4px;
     border: 1px solid #ccc;
+    font-size: 1em;
   }
+
   input[type=number] {
     width: 80px;
     margin-left: 10px;
   }
-  /* Price display style */
+
+  /* Price display */
   .price {
     font-weight: normal;
     color: #e67e22;
     margin-left: 10px;
+    font-size: 0.95em;
   }
-  /* Buttons */
+
+  /* Submit button */
   input[type=submit] {
     background-color: #27ae60;
     color: #fff;
     padding: 14px 24px;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 1.2em;
     cursor: pointer;
-    display: block;
+    width: 100%;
+    max-width: 300px;
     margin: 20px auto;
+    display: block;
     transition: background 0.3s;
   }
+
   input[type=submit]:hover {
     background-color: #2ecc71;
   }
-  /* Product group styling */
+
+  /* Product groups */
   .product-group {
     border: 1px solid #bdc3c7;
     padding: 15px;
     margin-top: 10px;
     border-radius: 6px;
   }
-  /* QR code styling */
+
+  /* QR code section */
   .qr-section {
     text-align: center;
     margin-top: 20px;
   }
+
   .qr-code {
     max-width: 200px;
+    width: 100%;
     height: auto;
     display: block;
     margin: 10px auto;
   }
+
   /* Payment info */
   .payment-info {
     font-size: 0.95em;
     background-color: #ecf0f1;
     padding: 10px;
     border-radius: 4px;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 600px){
+    body {
+      margin: 10px;
+    }
+    form {
+      padding: 15px;
+    }
+    input[type=submit] {
+      font-size: 1em;
+    }
   }
 </style>
 </head>
@@ -251,7 +287,7 @@
   <!-- QR Code -->
   <div class="section qr-section">
     <h3>PayNow QR Code</h3>
-    <img src="https://drive.google.com/file/d/1iSlgJYQlKPVDACl0wk8s7pFf5y-G4if6/view" alt="PayNow QR Code" class="qr-code" />
+    <img src="https://i.imgur.com/wXZFSob.jpeg" alt="PayNow QR Code" class="qr-code" />
     <p>Scan the QR code above to pay via PayNow.</p>
   </div>
 
