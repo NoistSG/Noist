@@ -264,17 +264,17 @@ function redirectToWhatsApp() {
   const address = encodeURIComponent(document.getElementById('address').value);
   const grandTotal = encodeURIComponent(document.getElementById('grandTotal').textContent);
 
-  // Build message
-  let message = `Order Details:\n`;
-  message += `Name: ${name}\n`;
-  message += `Mobile: ${mobile}\n`;
-  message += `Email: ${email}\n`;
-  message += `Delivery Method: ${deliveryMethod}\n`;
+  // Build message with clear formatting
+  let message = `📝 *Order Details:*\n`;
+  message += `\n*Name:* ${decodeURIComponent(name)}\n`;
+  message += `*Mobile:* ${decodeURIComponent(mobile)}\n`;
+  message += `*Email:* ${decodeURIComponent(email)}\n`;
+  message += `*Delivery Method:* ${deliveryMethod === 'delivery' ? 'Delivery' : 'Self Pickup'}\n`;
   if (deliveryMethod === 'delivery') {
-    message += `Address: ${address}\n`;
+    message += `*Address:* ${decodeURIComponent(address)}\n`;
   }
-  message += `Total: $${grandTotal}\n`;
-  message += `Please send the payment screenshot via WhatsApp.\n`;
+  message += `*Grand Total:* $${decodeURIComponent(grandTotal)}\n`;
+  message += `\nPlease send the payment screenshot via WhatsApp.`;
 
   // WhatsApp link
   const phoneNumber = '+6581942742'; // your WhatsApp number
@@ -283,20 +283,3 @@ function redirectToWhatsApp() {
   // Redirect
   window.location.href = whatsappUrl;
 }
-
-document.querySelectorAll('input[type="number"]').forEach(input => {
-  input.addEventListener('change', updateTotal);
-});
-
-document.querySelectorAll('input[name="deliveryMethod"]').forEach(radio => {
-  radio.addEventListener('change', () => {
-    document.getElementById('addressSection').style.display = (document.querySelector('input[name="deliveryMethod"]:checked').value === 'delivery') ? 'block' : 'none';
-  });
-});
-
-// Initialize total on page load
-updateTotal();
-</script>
-
-</body>
-</html>
