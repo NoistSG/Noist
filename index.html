@@ -22,7 +22,6 @@
   }
   th, td {
     padding: 8px;
-    text-align: center;
   }
   input[type="number"], input[type="text"], input[type="email"], textarea {
     width: 100%;
@@ -39,6 +38,12 @@
   .payment {
     text-align: center;
     margin-top: 20px;
+  }
+  .qr-image {
+    width: 4cm;
+    height: 4cm;
+    display: block;
+    margin: 10px auto;
   }
   .submit-btn {
     display: block;
@@ -164,7 +169,8 @@
       <td><input type="number" min="0" value="0" class="banana" data-price="30"></td>
       <td class="total-banana">$0</td>
     </tr>
-    <td>9 inch Chocolate</td><td>$33</td>
+    <tr>
+      <td>9 inch Chocolate</td><td>$33</td>
       <td><input type="number" min="0" value="0" class="banana" data-price="33"></td>
       <td class="total-banana">$0</td>
     </tr>
@@ -187,7 +193,7 @@
 
 <div class="payment">
   <h3>Pay via PayNow QR Code</h3>
-  <img src="https://i.imgur.com/wXZFSob.jpeg" alt="PayNow QR" width="200"><br><br>
+  <img src="https://i.imgur.com/wXZFSob.jpeg" alt="PayNow QR" class="qr-image" />
   <p>After payment, send the screenshot via WhatsApp to +65 8194 2742. Your order will be confirmed after verification.</p>
 </div>
 
