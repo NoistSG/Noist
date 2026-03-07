@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOIST - Homespun Bakes Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type=text], input[type=email], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        .product-group {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .product-group h3 {
+            margin-top: 0;
+        }
+        .qr-code {
+            display: block;
+            margin: 20px auto;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>NOIST - Homespun Bakes</h1>
+    <h2>Order Form</h2>
+
+    <form action="your-server-side-script" method="POST">
+        <div class="section">
+            <h3>Customer Details</h3>
+            <label for="name">Customer Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="contacts">Contacts:</label>
+            <input type="text" id="contacts" name="contacts" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="section">
+            <h3>Products</h3>
+            <!-- Lasagna Beef -->
+            <div class="product-group">
+                <h3>Lasagna - Beef</h3>
+                <label for="lasagna_beef_personal">Personal Portion ($18):</label>
+                <input type="number" id="lasagna_beef_personal" name="lasagna_beef_personal" min="0" step="1" />
+
+                <label for="lasagna_beef_sharing">Sharing Portion ($30):</label>
+                <input type="number" id="lasagna_beef_sharing" name="lasagna_beef_sharing" min="0" step="1" />
+
+                <label for="lasagna_beef_party">Party Portion ($90):</label>
+                <input type="number" id="lasagna_beef_party" name="lasagna_beef_party" min="0" step="1" />
+            </div>
+
+            <!-- Lasagna Chicken -->
+            <div class="product-group">
+                <h3>Lasagna - Chicken</h3>
+                <label for="lasagna_chicken_personal">Personal Portion ($16):</label>
+                <input type="number" id="lasagna_chicken_personal" name="lasagna_chicken_personal" min="0" step="1" />
+
+                <label for="lasagna_chicken_sharing">Sharing Portion ($28):</label>
+                <input type="number" id="lasagna_chicken_sharing" name="lasagna_chicken_sharing" min="0" step="1" />
+
+                <label for="lasagna_chicken_party">Party Portion ($85):</label>
+                <input type="number" id="lasagna_chicken_party" name="lasagna_chicken_party" min="0" step="1" />
+            </div>
+
+            <!-- Brownies -->
+            <div class="product-group">
+                <h3>Brownies</h3>
+                <label for="brownie_9inch">9 inch ($35):</label>
+                <input type="number" id="brownie_9inch" name="brownie_9inch" min="0" step="1" />
+
+                <label for="brownie_nutella">9 inch Nutella ($38):</label>
+                <input type="number" id="brownie_nutella" name="brownie_nutella" min="0" step="1" />
+
+                <label for="personal_brownie">Personal Brownie ($6):</label>
+                <input type="number" id="personal_brownie" name="personal_brownie" min="0" step="1" />
+
+                <label for="personal_brownie_nutella">Personal Brownie Nutella ($7):</label>
+                <input type="number" id="personal_brownie_nutella" name="personal_brownie_nutella" min="0" step="1" />
+
+                <label for="brownie_bites">Brownie Bites ($25 per bottle):</label>
+                <input type="number" id="brownie_bites" name="brownie_bites" min="0" step="1" />
+            </div>
+
+            <!-- Banana Cake -->
+            <div class="product-group">
+                <h3>Banana Cake</h3>
+                <label for="banana_9inch">9 inch ($30):</label>
+                <input type="number" id="banana_9inch" name="banana_9inch" min="0" step="1" />
+
+                <label for="banana_chocolate">9 inch Chocolate ($33):</label>
+                <input type="number" id="banana_chocolate" name="banana_chocolate" min="0" step="1" />
+
+                <label for="personal_banana">Personal Banana Cake ($5):</label>
+                <input type="number" id="personal_banana" name="personal_banana" min="0" step="1" />
+
+                <label for="personal_banana_chocolate">Personal Banana Cake Chocolate ($6):</label>
+                <input type="number" id="personal_banana_chocolate" name="personal_banana_chocolate" min="0" step="1" />
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Mode of Collection</h3>
+            <label>
+                <input type="radio" name="collection_method" value="self_pickup" checked> Self Pick Up
+            </label>
+            <label>
+                <input type="radio" name="collection_method" value="delivery"> Delivery (+$10)
+            </label>
+            <div id="delivery_address" style="margin-top:10px; display:none;">
+                <label for="address">Delivery Address:</label>
+                <textarea id="address" name="address" rows="3" placeholder="Insert delivery address here..."></textarea>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Payment Method</h3>
+            <label>
+                <input type="radio" name="payment_method" value="paynow" required> PayNow
+            </label>
+        </div>
+
+        <div class="section">
+            <p>After payment, please send an image of your payment and order details via WhatsApp to <strong>+65 8194 2742</strong>.</p>
+        </div>
+
+        <!-- QR Code for PayNow -->
+        <div class="section">
+            <h3>PayNow QR Code</h3>
+            <img src="YOUR_QR_CODE_IMAGE_URL_HERE" alt="PayNow QR Code" class="qr-code" />
+            <p>Scan the QR code above to pay via PayNow.</p>
+        </div>
+
+        <input type="submit" value="Submit Order" />
+    </form>
+
+    <script>
+        // Show/hide delivery address based on selection
+        const deliveryRadio = document.querySelector('input[value="delivery"]');
+        const pickupRadio = document.querySelector('input[value="self_pickup"]');
+        const addressDiv = document.getElementById('delivery_address');
+
+        function toggleAddress() {
+            if (deliveryRadio.checked) {
+                addressDiv.style.display = 'block';
+            } else {
+                addressDiv.style.display = 'none';
+            }
+        }
+
+        deliveryRadio.addEventListener('change', toggleAddress);
+        pickupRadio.addEventListener('change', toggleAddress);
+        // Initialize
+        toggleAddress();
+    </script>
+</body>
+</html>
