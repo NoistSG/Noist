@@ -3,142 +3,186 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Order Form</title>
+<title>Order & Payment</title>
+<!-- QR Code library from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
 <style>
-  /* Basic styling for clarity */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f0e1;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.4;
+    color: #000;
+  }
+  h1, h2, h3 {
+    color: #bfa14d;
+    text-align: center;
+  }
+  /* Container styles for mobile friendliness */
+  .section {
+    margin-bottom: 20px;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  input[type="number"], input[type="text"], input[type="file"] {
+    padding: 10px;
+    border: 2px solid #bfa14d;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+  /* Radio buttons styling */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .radio-option input {
+    margin-right: 10px;
+  }
+  /* Delivery address section, hidden/shown */
   #delivery_address {
     display: none;
-    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff8f0;
+    border: 2px solid #bfa14d;
+    border-radius: 8px;
   }
-  .product {
-    margin-bottom: 10px;
+  /* Buttons style */
+  button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #bfa14d;
+    color: #fff;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #a0843f;
+  }
+  /* QR code container size */
+  #qrcode {
+    margin: 20px auto;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Responsive text size for small screens */
+  @media(max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    h2, h3 {
+      font-size: 20px;
+    }
+    label {
+      font-size: 16px;
+    }
+    input[type="number"], input[type="text"], input[type="file"] {
+      font-size: 16px;
+    }
+    button {
+      font-size: 18px;
+      padding: 12px;
+    }
   }
 </style>
 </head>
 <body>
 
-<h1>Order Form</h1>
+<h1>Order & Payment</h1>
 
 <!-- Collection Method -->
+<div class="section">
 <h2>Choose Collection Method:</h2>
-<label><input type="radio" name="collection_method" value="self_pickup" checked /> Self Pick Up</label>
-<label><input type="radio" name="collection_method" value="delivery" /> Delivery</label>
+<div class="radio-group">
+  <label class="radio-option"><input type="radio" name="collection_method" value="self_pickup" checked /> Self Pick Up</label>
+  <label class="radio-option"><input type="radio" name="collection_method" value="delivery" /> Delivery</label>
+</div>
+</div>
 
 <!-- Delivery Address -->
 <div id="delivery_address">
   <h3>Delivery Address</h3>
-  <label>Street: <input type="text" name="street" /></label><br />
-  <label>City: <input type="text" name="city" /></label><br />
-  <label>Zip Code: <input type="text" name="zip" /></label>
+  <label>Street: <input type="text" id="street" placeholder="Street" /></label>
+  <label>City: <input type="text" id="city" placeholder="City" /></label>
+  <label>Zip Code: <input type="text" id="zip" placeholder="Zip Code" /></label>
 </div>
 
 <!-- Products -->
+<div class="section">
 <h2>Products:</h2>
-
-<div class="product">
-  <label>Lasagna Beef Personal ($18): 
-    <input type="number" name="lasagna_beef_personal" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Lasagna Beef Sharing ($30): 
-    <input type="number" name="lasagna_beef_sharing" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Lasagna Beef Party ($90): 
-    <input type="number" name="lasagna_beef_party" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Lasagna Chicken Personal ($16): 
-    <input type="number" name="lasagna_chicken_personal" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Lasagna Chicken Sharing ($28): 
-    <input type="number" name="lasagna_chicken_sharing" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Lasagna Chicken Party ($85): 
-    <input type="number" name="lasagna_chicken_party" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Brownie 9 inch ($35): 
-    <input type="number" name="brownie_9inch" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Brownie Nutella ($38): 
-    <input type="number" name="brownie_nutella" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Personal Brownie ($6): 
-    <input type="number" name="personal_brownie" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Personal Brownie Nutella ($7): 
-    <input type="number" name="personal_brownie_nutella" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Brownie Bites ($25): 
-    <input type="number" name="brownie_bites" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Banana 9 inch ($30): 
-    <input type="number" name="banana_9inch" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Banana Chocolate ($33): 
-    <input type="number" name="banana_chocolate" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Personal Banana ($5): 
-    <input type="number" name="personal_banana" value="0" min="0" />
-  </label>
-</div>
-<div class="product">
-  <label>Personal Banana Chocolate ($6): 
-    <input type="number" name="personal_banana_chocolate" value="0" min="0" />
-  </label>
+<div><label>Lasagna Beef Personal ($18): <input type="number" id="lasagna_beef_personal" value="0" min="0" /></label></div>
+<div><label>Lasagna Beef Sharing ($30): <input type="number" id="lasagna_beef_sharing" value="0" min="0" /></label></div>
+<div><label>Lasagna Beef Party ($90): <input type="number" id="lasagna_beef_party" value="0" min="0" /></label></div>
+<div><label>Lasagna Chicken Personal ($16): <input type="number" id="lasagna_chicken_personal" value="0" min="0" /></label></div>
+<div><label>Lasagna Chicken Sharing ($28): <input type="number" id="lasagna_chicken_sharing" value="0" min="0" /></label></div>
+<div><label>Lasagna Chicken Party ($85): <input type="number" id="lasagna_chicken_party" value="0" min="0" /></label></div>
+<div><label>Brownie 9 inch ($35): <input type="number" id="brownie_9inch" value="0" min="0" /></label></div>
+<div><label>Brownie Nutella ($38): <input type="number" id="brownie_nutella" value="0" min="0" /></label></div>
+<div><label>Personal Brownie ($6): <input type="number" id="personal_brownie" value="0" min="0" /></label></div>
+<div><label>Personal Brownie Nutella ($7): <input type="number" id="personal_brownie_nutella" value="0" min="0" /></label></div>
+<div><label>Brownie Bites ($25): <input type="number" id="brownie_bites" value="0" min="0" /></label></div>
+<div><label>Banana 9 inch ($30): <input type="number" id="banana_9inch" value="0" min="0" /></label></div>
+<div><label>Banana Chocolate ($33): <input type="number" id="banana_chocolate" value="0" min="0" /></label></div>
+<div><label>Personal Banana ($5): <input type="number" id="personal_banana" value="0" min="0" /></label></div>
+<div><label>Personal Banana Chocolate ($6): <input type="number" id="personal_banana_chocolate" value="0" min="0" /></label></div>
 </div>
 
-<!-- Total Display -->
+<!-- Total -->
 <h2>Grand Total: <span id="grandTotal">$0.00</span></h2>
 
-<!-- Submit Button -->
-<button type="button" onclick="alert('Order submitted!')">Submit Order</button>
+<!-- Order summary, QR code, payment proof -->
+<div id="confirmationSection">
+<h3>Order Summary</h3>
+<div id="orderSummary"></div>
+<h3>Upload Payment Proof</h3>
+<input type="file" id="paymentImage" accept="image/*" />
+<br /><br />
+<button id="generateQR">Generate QR Code for Payment</button>
+<div id="qrcode"></div>
+<br />
+<button id="sendWhatsAppBtn">Send Order via WhatsApp</button>
+</div>
 
-<!-- JavaScript -->
+<!-- Place order button -->
+<button id="placeOrderBtn">Place Order & Pay</button>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
 <script>
-  // Show or hide delivery address based on selection
+  // Toggle delivery address
   const deliveryRadio = document.querySelector('input[value="delivery"]');
   const pickupRadio = document.querySelector('input[value="self_pickup"]');
   const addressDiv = document.getElementById('delivery_address');
 
   function toggleAddress() {
-    if (deliveryRadio.checked) {
-      addressDiv.style.display = 'block';
-    } else {
-      addressDiv.style.display = 'none';
-    }
+    addressDiv.style.display = (deliveryRadio.checked) ? 'block' : 'none';
   }
-
-  // Attach event listeners for the radio buttons
   deliveryRadio.addEventListener('change', toggleAddress);
   pickupRadio.addEventListener('change', toggleAddress);
-  // Initialize address display
   toggleAddress();
 
-  // Define prices for each product
+  // Prices
   const prices = {
     lasagna_beef_personal: 18,
     lasagna_beef_sharing: 30,
@@ -157,41 +201,84 @@
     personal_banana_chocolate: 6
   };
 
-  // Function to calculate total
   function calculateTotal() {
     let total = 0;
-
-    // Sum product totals
+    let orderText = '';
     for (const [key, price] of Object.entries(prices)) {
-      const qty = parseInt(document.querySelector(`input[name="${key}"]`).value) || 0;
-      total += qty * price;
+      const qty = parseInt(document.getElementById(key).value) || 0;
+      if (qty > 0) {
+        orderText += `${key.replace(/_/g, ' ')} x ${qty} - $${(qty * price).toFixed(2)}\n`;
+        total += qty * price;
+      }
     }
-
-    // Add delivery fee if "Delivery" is selected
-    const deliverySelected = document.querySelector('input[name="collection_method"]:checked').value === 'delivery';
-    if (deliverySelected) {
-      total += 10; // delivery fee
+    if (document.querySelector('input[name="collection_method"]:checked').value === 'delivery') {
+      total += 10;
+      orderText += `Delivery Fee: $10.00\n`;
     }
-
-    // Update total display
+    document.getElementById('orderSummary').textContent = orderText || 'No items selected.';
     document.getElementById('grandTotal').textContent = `$${total.toFixed(2)}`;
+    return total;
   }
 
-  // Attach event listeners to quantity inputs
-  const quantityInputs = document.querySelectorAll('input[type=number]');
-  quantityInputs.forEach(input => {
+  document.querySelectorAll('input[type="number"]').forEach(input => {
     input.addEventListener('input', calculateTotal);
   });
-
-  // Attach event listeners to collection method radio buttons
-  const collectionRadios = document.querySelectorAll('input[name="collection_method"]');
-  collectionRadios.forEach(radio => {
-    radio.addEventListener('change', calculateTotal);
+  document.querySelectorAll('input[name="collection_method"]').forEach(r => {
+    r.addEventListener('change', calculateTotal);
   });
 
-  // Calculate total on page load
-  window.onload = calculateTotal;
-</script>
+  // Generate QR code
+function generateQRCode() {
+  const qrCodeContainer = document.getElementById('qrcode');
+  qrCodeContainer.innerHTML = '';
+  const orderDetails = document.getElementById('orderSummary').textContent;
+  const totalText = document.getElementById('grandTotal').textContent;
+  const message = `Order Details:\n${orderDetails}\nTotal: ${totalText}`;
+  QRCode.toCanvas(message, { width: 200 }, function (error, canvas) {
+    if (error) console.error(error);
+    qrCodeContainer.appendChild(canvas);
+  });
+}
 
+// Handle "Place Order & Pay"
+document.getElementById('placeOrderBtn').addEventListener('click', () => {
+  calculateTotal();
+  document.getElementById('confirmationSection').style.display = 'block';
+
+  // Prepare message
+  const collectionMethod = document.querySelector('input[name="collection_method"]:checked').value;
+  const street = document.getElementById('street').value;
+  const city = document.getElementById('city').value;
+  const zip = document.getElementById('zip').value;
+  let addressInfo = '';
+  if (collectionMethod === 'delivery') {
+    addressInfo = `Address:\nStreet: ${street}\nCity: ${city}\nZip: ${zip}\n`;
+  }
+
+  const orderDetails = document.getElementById('orderSummary').textContent;
+  const totalText = document.getElementById('grandTotal').textContent;
+  let message = `Order Details:\n${orderDetails}\nTotal: ${totalText}\nCollection: ${collectionMethod}\n${addressInfo}`;
+
+  document.getElementById('sendWhatsAppBtn').onclick = () => {
+    const whatsappNumber = '+6581942742'; // Your number
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodedMessage}`;
+    window.open(whatsappLink, '_blank');
+  };
+});
+
+// Generate QR code
+document.getElementById('generateQR').addEventListener('click', generateQRCode);
+
+// Send WhatsApp after upload
+document.getElementById('sendWhatsAppBtn').addEventListener('click', () => {
+  const fileInput = document.getElementById('paymentImage');
+  if (fileInput.files.length === 0) {
+    alert('Please upload your payment proof before sending.');
+    return;
+  }
+  alert('Payment proof uploaded! Please send the WhatsApp message to confirm your order.');
+});
+</script>
 </body>
 </html>
