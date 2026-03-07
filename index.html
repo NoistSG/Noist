@@ -197,7 +197,7 @@
   <p>After payment, send the screenshot via WhatsApp to +65 8194 2742. Your order will be confirmed after verification.</p>
 </div>
 
-<button class="submit-btn" onclick="calculateTotal()">Confirm Order</button>
+<button class="submit-btn" onclick="redirectToWhatsApp()">Confirm Order</button>
 
 <script>
 function updateTotal() {
@@ -252,10 +252,38 @@ function updateTotal() {
   document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
 }
 
-function calculateTotal() {
+function redirectToWhatsApp() {
+  // First, update totals
   updateTotal();
-  alert('Your total is $' + document.getElementById('grandTotal').textContent + '.\nPlease proceed with payment.');
+
+  // Collect customer info
+  const name = encodeURIComponent(document.getElementById('customerName').value);
+  const mobile = encodeURIComponent(document.getElementById('mobile').value);
+  const email = encodeURIComponent(document.getElementById('email').value);
+  const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+  const address = encodeURIComponent(document.getElementById('address').value);
+  const grandTotal = encodeURIComponent(document.getElementById('grandTotal').textContent);
+
+  // Build message
+  let message = `Order Details:\n`;
+  message += `Name: ${name}\n`;
+  message += `Mobile: ${mobile}\n`;
+  message += `Email: ${email}\n`;
+  message += `Delivery Method: ${deliveryMethod}\n`;
+  if (deliveryMethod === 'delivery') {
+    message += `Address: ${address}\n`;
+  }
+  message += `Total: $${grandTotal}\n`;
+  message += `Please send the payment screenshot via WhatsApp.\n`;
+
+  // WhatsApp link
+  const phoneNumber = '+6581942742'; // your WhatsApp number
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  // Redirect
+  window.location.href = whatsappUrl;
 }
+
 document.querySelectorAll('input[type="number"]').forEach(input => {
   input.addEventListener('change', updateTotal);
 });
