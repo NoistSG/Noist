@@ -3,308 +3,123 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NOIST - Homespun Bakes Order Form</title>
+<title>Order Form</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    line-height: 1.6;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-
-  h1, h2 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 10px;
-  }
-
-  form {
-    max-width: 950px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    font-size: 1em;
-  }
-
-  .section {
-    margin-bottom: 25px;
-  }
-
-  h3 {
-    background-color: #2980b9;
-    color: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 0;
-    font-size: 1.2em;
-  }
-
-  label {
-    display: block;
-    margin-top: 12px;
-    font-weight: bold;
-    font-size: 1em;
-  }
-
-  input[type=text], input[type=email], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-  }
-
-  input[type=number] {
-    width: 80px;
-    margin-left: 10px;
-  }
-
-  /* Price display */
-  .price {
-    font-weight: normal;
-    color: #e67e22;
-    margin-left: 10px;
-    font-size: 0.95em;
-  }
-
-  /* Submit button */
-  input[type=submit] {
-    background-color: #27ae60;
-    color: #fff;
-    padding: 14px 24px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.2em;
-    cursor: pointer;
-    width: 100%;
-    max-width: 300px;
-    margin: 20px auto;
-    display: block;
-    transition: background 0.3s;
-  }
-
-  input[type=submit]:hover {
-    background-color: #2ecc71;
-  }
-
-  /* Product groups */
-  .product-group {
-    border: 1px solid #bdc3c7;
-    padding: 15px;
+  /* Basic styling for clarity */
+  #delivery_address {
+    display: none;
     margin-top: 10px;
-    border-radius: 6px;
   }
-
-  /* QR code section */
-  .qr-section {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .qr-code {
-    max-width: 200px;
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 10px auto;
-  }
-
-  /* Payment info */
-  .payment-info {
-    font-size: 0.95em;
-    background-color: #ecf0f1;
-    padding: 10px;
-    border-radius: 4px;
-  }
-
-  /* Responsive adjustments */
-  @media(max-width: 600px){
-    body {
-      margin: 10px;
-    }
-    form {
-      padding: 15px;
-    }
-    input[type=submit] {
-      font-size: 1em;
-    }
+  .product {
+    margin-bottom: 10px;
   }
 </style>
 </head>
 <body>
 
-<h1>NOIST - Homespun Bakes</h1>
-<h2>Order Form</h2>
+<h1>Order Form</h1>
 
-<form action="your-server-side-script" method="POST">
+<!-- Collection Method -->
+<h2>Choose Collection Method:</h2>
+<label><input type="radio" name="collection_method" value="self_pickup" checked /> Self Pick Up</label>
+<label><input type="radio" name="collection_method" value="delivery" /> Delivery</label>
 
-  <!-- Customer Details -->
-  <div class="section">
-    <h3>Customer Details</h3>
-    <label for="name">Customer Name:</label>
-    <input type="text" id="name" name="name" required>
+<!-- Delivery Address -->
+<div id="delivery_address">
+  <h3>Delivery Address</h3>
+  <label>Street: <input type="text" name="street" /></label><br />
+  <label>City: <input type="text" name="city" /></label><br />
+  <label>Zip Code: <input type="text" name="zip" /></label>
+</div>
 
-    <label for="contacts">Contacts:</label>
-    <input type="text" id="contacts" name="contacts" required>
+<!-- Products -->
+<h2>Products:</h2>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-  </div>
+<div class="product">
+  <label>Lasagna Beef Personal ($18): 
+    <input type="number" name="lasagna_beef_personal" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Lasagna Beef Sharing ($30): 
+    <input type="number" name="lasagna_beef_sharing" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Lasagna Beef Party ($90): 
+    <input type="number" name="lasagna_beef_party" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Lasagna Chicken Personal ($16): 
+    <input type="number" name="lasagna_chicken_personal" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Lasagna Chicken Sharing ($28): 
+    <input type="number" name="lasagna_chicken_sharing" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Lasagna Chicken Party ($85): 
+    <input type="number" name="lasagna_chicken_party" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Brownie 9 inch ($35): 
+    <input type="number" name="brownie_9inch" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Brownie Nutella ($38): 
+    <input type="number" name="brownie_nutella" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Personal Brownie ($6): 
+    <input type="number" name="personal_brownie" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Personal Brownie Nutella ($7): 
+    <input type="number" name="personal_brownie_nutella" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Brownie Bites ($25): 
+    <input type="number" name="brownie_bites" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Banana 9 inch ($30): 
+    <input type="number" name="banana_9inch" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Banana Chocolate ($33): 
+    <input type="number" name="banana_chocolate" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Personal Banana ($5): 
+    <input type="number" name="personal_banana" value="0" min="0" />
+  </label>
+</div>
+<div class="product">
+  <label>Personal Banana Chocolate ($6): 
+    <input type="number" name="personal_banana_chocolate" value="0" min="0" />
+  </label>
+</div>
 
-  <!-- Products -->
-  <div class="section">
-    <h3>Products</h3>
+<!-- Total Display -->
+<h2>Grand Total: <span id="grandTotal">$0.00</span></h2>
 
-    <!-- Lasagna Beef -->
-    <div class="product-group">
-      <h4>Lasagna - Beef</h4>
-      <label>
-        Personal ($18):
-        <input type="number" name="lasagna_beef_personal" min="0" value="0" class="qty">
-        <span class="price">($18 each)</span>
-      </label>
-      <label>
-        Sharing ($30):
-        <input type="number" name="lasagna_beef_sharing" min="0" value="0" class="qty">
-        <span class="price">($30 each)</span>
-      </label>
-      <label>
-        Party ($90):
-        <input type="number" name="lasagna_beef_party" min="0" value="0" class="qty">
-        <span class="price">($90 each)</span>
-      </label>
-    </div>
+<!-- Submit Button -->
+<button type="button" onclick="alert('Order submitted!')">Submit Order</button>
 
-    <!-- Lasagna Chicken -->
-    <div class="product-group">
-      <h4>Lasagna - Chicken</h4>
-      <label>
-        Personal ($16):
-        <input type="number" name="lasagna_chicken_personal" min="0" value="0" class="qty">
-        <span class="price">($16 each)</span>
-      </label>
-      <label>
-        Sharing ($28):
-        <input type="number" name="lasagna_chicken_sharing" min="0" value="0" class="qty">
-        <span class="price">($28 each)</span>
-      </label>
-      <label>
-        Party ($85):
-        <input type="number" name="lasagna_chicken_party" min="0" value="0" class="qty">
-        <span class="price">($85 each)</span>
-      </label>
-    </div>
-
-    <!-- Brownies -->
-    <div class="product-group">
-      <h4>Brownies</h4>
-      <label>
-        9 inch ($35):
-        <input type="number" name="brownie_9inch" min="0" value="0" class="qty">
-        <span class="price">($35)</span>
-      </label>
-      <label>
-        9 inch Nutella ($38):
-        <input type="number" name="brownie_nutella" min="0" value="0" class="qty">
-        <span class="price">($38)</span>
-      </label>
-      <label>
-        Personal ($6):
-        <input type="number" name="personal_brownie" min="0" value="0" class="qty">
-        <span class="price">($6)</span>
-      </label>
-      <label>
-        Personal Nutella ($7):
-        <input type="number" name="personal_brownie_nutella" min="0" value="0" class="qty">
-        <span class="price">($7)</span>
-      </label>
-      <label>
-        Brownie Bites ($25 per bottle):
-        <input type="number" name="brownie_bites" min="0" value="0" class="qty">
-        <span class="price">($25)</span>
-      </label>
-    </div>
-
-    <!-- Banana Cake -->
-    <div class="product-group">
-      <h4>Banana Cake</h4>
-      <label>
-        9 inch ($30):
-        <input type="number" name="banana_9inch" min="0" value="0" class="qty">
-        <span class="price">($30)</span>
-      </label>
-      <label>
-        9 inch Chocolate ($33):
-        <input type="number" name="banana_chocolate" min="0" value="0" class="qty">
-        <span class="price">($33)</span>
-      </label>
-      <label>
-        Personal Banana Cake ($5):
-        <input type="number" name="personal_banana" min="0" value="0" class="qty">
-        <span class="price">($5)</span>
-      </label>
-      <label>
-        Personal Banana Cake Chocolate ($6):
-        <input type="number" name="personal_banana_chocolate" min="0" value="0" class="qty">
-        <span class="price">($6)</span>
-      </label>
-    </div>
-  </div>
-
-  <!-- Mode of Collection -->
-  <div class="section">
-    <h3>Mode of Collection</h3>
-    <label>
-      <input type="radio" name="collection_method" value="self_pickup" checked> Self Pick Up
-    </label>
-    <label>
-      <input type="radio" name="collection_method" value="delivery"> Delivery (+$10)
-    </label>
-    <div id="delivery_address" style="margin-top:10px; display:none;">
-      <label for="address">Delivery Address:</label>
-      <textarea id="address" name="address" rows="3" placeholder="Insert delivery address here..."></textarea>
-    </div>
-  </div>
-
-  <!-- Payment Method -->
-  <div class="section">
-    <h3>Payment Method</h3>
-    <label>
-      <input type="radio" name="payment_method" value="paynow" required> PayNow
-    </label>
-  </div>
-
-  <!-- Payment Instructions -->
-  <div class="section payment-info">
-    <p>After payment, please send an image of your payment and order details via WhatsApp to <strong>+65 8194 2742</strong>.</p>
-  </div>
-
-  <!-- QR Code -->
-  <div class="section qr-section">
-    <h3>PayNow QR Code</h3>
-    <img src="https://i.imgur.com/wXZFSob.jpeg" alt="PayNow QR Code" class="qr-code" />
-    <p>Scan the QR code above to pay via PayNow.</p>
-  </div>
-
-  <!-- Grand Total display -->
-  <div class="section" style="text-align: center;">
-    <h3>Grand Total: <span id="grandTotal">$0.00</span></h3>
-  </div>
-
-  <!-- Submit Button -->
-  <div style="text-align:center;">
-    <input type="submit" value="Submit Order" />
-  </div>
-
-</form>
-
+<!-- JavaScript -->
 <script>
-  // Show/hide delivery address based on selection
+  // Show or hide delivery address based on selection
   const deliveryRadio = document.querySelector('input[value="delivery"]');
   const pickupRadio = document.querySelector('input[value="self_pickup"]');
   const addressDiv = document.getElementById('delivery_address');
@@ -317,12 +132,13 @@
     }
   }
 
+  // Attach event listeners for the radio buttons
   deliveryRadio.addEventListener('change', toggleAddress);
   pickupRadio.addEventListener('change', toggleAddress);
-  // Initialize
+  // Initialize address display
   toggleAddress();
 
-  // Prices for products
+  // Define prices for each product
   const prices = {
     lasagna_beef_personal: 18,
     lasagna_beef_sharing: 30,
@@ -345,28 +161,35 @@
   function calculateTotal() {
     let total = 0;
 
+    // Sum product totals
     for (const [key, price] of Object.entries(prices)) {
       const qty = parseInt(document.querySelector(`input[name="${key}"]`).value) || 0;
       total += qty * price;
     }
 
-    // Add delivery fee if selected
+    // Add delivery fee if "Delivery" is selected
     const deliverySelected = document.querySelector('input[name="collection_method"]:checked').value === 'delivery';
     if (deliverySelected) {
       total += 10; // delivery fee
     }
 
-    // Update grand total display
+    // Update total display
     document.getElementById('grandTotal').textContent = `$${total.toFixed(2)}`;
   }
 
-  // Attach event listeners to all quantity inputs
-  const inputs = document.querySelectorAll('input[type=number]');
-  inputs.forEach(input => {
+  // Attach event listeners to quantity inputs
+  const quantityInputs = document.querySelectorAll('input[type=number]');
+  quantityInputs.forEach(input => {
     input.addEventListener('input', calculateTotal);
   });
 
-  // Trigger calculation on page load
+  // Attach event listeners to collection method radio buttons
+  const collectionRadios = document.querySelectorAll('input[name="collection_method"]');
+  collectionRadios.forEach(radio => {
+    radio.addEventListener('change', calculateTotal);
+  });
+
+  // Calculate total on page load
   window.onload = calculateTotal;
 </script>
 
