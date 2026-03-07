@@ -1,195 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NOIST - Homespun Bakes Order Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        form {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input[type=text], input[type=email], select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 4px;
-            box-sizing: border-box;
-        }
-        input[type=submit] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
-        .product-group {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-        }
-        .product-group h3 {
-            margin-top: 0;
-        }
-        .qr-code {
-            display: block;
-            margin: 20px auto;
-            max-width: 200px;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOIST - Homespun Bakes Order Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+  }
+  form {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .section {
+    margin-bottom: 25px;
+  }
+  h3 {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 0;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  input[type=number] {
+    width: 80px;
+    margin-left: 10px;
+  }
+  /* Price display style */
+  .price {
+    font-weight: normal;
+    color: #e67e22;
+    margin-left: 10px;
+  }
+  /* Buttons */
+  input[type=submit] {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    transition: background 0.3s;
+  }
+  input[type=submit]:hover {
+    background-color: #2ecc71;
+  }
+  /* Product group styling */
+  .product-group {
+    border: 1px solid #bdc3c7;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 6px;
+  }
+  /* QR code styling */
+  .qr-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .qr-code {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+  }
+  /* Payment info */
+  .payment-info {
+    font-size: 0.95em;
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-radius: 4px;
+  }
+</style>
 </head>
 <body>
-    <h1>NOIST - Homespun Bakes</h1>
-    <h2>Order Form</h2>
 
-    <form action="your-server-side-script" method="POST">
-        <div class="section">
-            <h3>Customer Details</h3>
-            <label for="name">Customer Name:</label>
-            <input type="text" id="name" name="name" required>
+<h1>NOIST - Homespun Bakes</h1>
+<h2>Order Form</h2>
 
-            <label for="contacts">Contacts:</label>
-            <input type="text" id="contacts" name="contacts" required>
+<form action="your-server-side-script" method="POST">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
+  <!-- Customer Details -->
+  <div class="section">
+    <h3>Customer Details</h3>
+    <label for="name">Customer Name:</label>
+    <input type="text" id="name" name="name" required>
 
-        <div class="section">
-            <h3>Products</h3>
-            <!-- Lasagna Beef -->
-            <div class="product-group">
-                <h3>Lasagna - Beef</h3>
-                <label for="lasagna_beef_personal">Personal Portion ($18):</label>
-                <input type="number" id="lasagna_beef_personal" name="lasagna_beef_personal" min="0" step="1" />
+    <label for="contacts">Contacts:</label>
+    <input type="text" id="contacts" name="contacts" required>
 
-                <label for="lasagna_beef_sharing">Sharing Portion ($30):</label>
-                <input type="number" id="lasagna_beef_sharing" name="lasagna_beef_sharing" min="0" step="1" />
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
 
-                <label for="lasagna_beef_party">Party Portion ($90):</label>
-                <input type="number" id="lasagna_beef_party" name="lasagna_beef_party" min="0" step="1" />
-            </div>
+  <!-- Products -->
+  <div class="section">
+    <h3>Products</h3>
 
-            <!-- Lasagna Chicken -->
-            <div class="product-group">
-                <h3>Lasagna - Chicken</h3>
-                <label for="lasagna_chicken_personal">Personal Portion ($16):</label>
-                <input type="number" id="lasagna_chicken_personal" name="lasagna_chicken_personal" min="0" step="1" />
+    <!-- Lasagna Beef -->
+    <div class="product-group">
+      <h4>Lasagna - Beef</h4>
+      <label>
+        Personal ($18):
+        <input type="number" name="lasagna_beef_personal" min="0" value="0">
+        <span class="price">($18 each)</span>
+      </label>
+      <label>
+        Sharing ($30):
+        <input type="number" name="lasagna_beef_sharing" min="0" value="0">
+        <span class="price">($30 each)</span>
+      </label>
+      <label>
+        Party ($90):
+        <input type="number" name="lasagna_beef_party" min="0" value="0">
+        <span class="price">($90 each)</span>
+      </label>
+    </div>
 
-                <label for="lasagna_chicken_sharing">Sharing Portion ($28):</label>
-                <input type="number" id="lasagna_chicken_sharing" name="lasagna_chicken_sharing" min="0" step="1" />
+    <!-- Lasagna Chicken -->
+    <div class="product-group">
+      <h4>Lasagna - Chicken</h4>
+      <label>
+        Personal ($16):
+        <input type="number" name="lasagna_chicken_personal" min="0" value="0">
+        <span class="price">($16 each)</span>
+      </label>
+      <label>
+        Sharing ($28):
+        <input type="number" name="lasagna_chicken_sharing" min="0" value="0">
+        <span class="price">($28 each)</span>
+      </label>
+      <label>
+        Party ($85):
+        <input type="number" name="lasagna_chicken_party" min="0" value="0">
+        <span class="price">($85 each)</span>
+      </label>
+    </div>
 
-                <label for="lasagna_chicken_party">Party Portion ($85):</label>
-                <input type="number" id="lasagna_chicken_party" name="lasagna_chicken_party" min="0" step="1" />
-            </div>
+    <!-- Brownies -->
+    <div class="product-group">
+      <h4>Brownies</h4>
+      <label>
+        9 inch ($35):
+        <input type="number" name="brownie_9inch" min="0" value="0">
+        <span class="price">($35)</span>
+      </label>
+      <label>
+        9 inch Nutella ($38):
+        <input type="number" name="brownie_nutella" min="0" value="0">
+        <span class="price">($38)</span>
+      </label>
+      <label>
+        Personal ($6):
+        <input type="number" name="personal_brownie" min="0" value="0">
+        <span class="price">($6)</span>
+      </label>
+      <label>
+        Personal Nutella ($7):
+        <input type="number" name="personal_brownie_nutella" min="0" value="0">
+        <span class="price">($7)</span>
+      </label>
+      <label>
+        Brownie Bites ($25 per bottle):
+        <input type="number" name="brownie_bites" min="0" value="0">
+        <span class="price">($25)</span>
+      </label>
+    </div>
 
-            <!-- Brownies -->
-            <div class="product-group">
-                <h3>Brownies</h3>
-                <label for="brownie_9inch">9 inch ($35):</label>
-                <input type="number" id="brownie_9inch" name="brownie_9inch" min="0" step="1" />
+    <!-- Banana Cake -->
+    <div class="product-group">
+      <h4>Banana Cake</h4>
+      <label>
+        9 inch ($30):
+        <input type="number" name="banana_9inch" min="0" value="0">
+        <span class="price">($30)</span>
+      </label>
+      <label>
+        9 inch Chocolate ($33):
+        <input type="number" name="banana_chocolate" min="0" value="0">
+        <span class="price">($33)</span>
+      </label>
+      <label>
+        Personal Banana Cake ($5):
+        <input type="number" name="personal_banana" min="0" value="0">
+        <span class="price">($5)</span>
+      </label>
+      <label>
+        Personal Banana Cake Chocolate ($6):
+        <input type="number" name="personal_banana_chocolate" min="0" value="0">
+        <span class="price">($6)</span>
+      </label>
+    </div>
+  </div>
 
-                <label for="brownie_nutella">9 inch Nutella ($38):</label>
-                <input type="number" id="brownie_nutella" name="brownie_nutella" min="0" step="1" />
+  <!-- Mode of Collection -->
+  <div class="section">
+    <h3>Mode of Collection</h3>
+    <label>
+      <input type="radio" name="collection_method" value="self_pickup" checked> Self Pick Up
+    </label>
+    <label>
+      <input type="radio" name="collection_method" value="delivery"> Delivery (+$10)
+    </label>
+    <div id="delivery_address" style="margin-top:10px; display:none;">
+      <label for="address">Delivery Address:</label>
+      <textarea id="address" name="address" rows="3" placeholder="Insert delivery address here..."></textarea>
+    </div>
+  </div>
 
-                <label for="personal_brownie">Personal Brownie ($6):</label>
-                <input type="number" id="personal_brownie" name="personal_brownie" min="0" step="1" />
+  <!-- Payment Method -->
+  <div class="section">
+    <h3>Payment Method</h3>
+    <label>
+      <input type="radio" name="payment_method" value="paynow" required> PayNow
+    </label>
+  </div>
 
-                <label for="personal_brownie_nutella">Personal Brownie Nutella ($7):</label>
-                <input type="number" id="personal_brownie_nutella" name="personal_brownie_nutella" min="0" step="1" />
+  <!-- Payment Instructions -->
+  <div class="section payment-info">
+    <p>After payment, please send an image of your payment and order details via WhatsApp to <strong>+65 8194 2742</strong>.</p>
+  </div>
 
-                <label for="brownie_bites">Brownie Bites ($25 per bottle):</label>
-                <input type="number" id="brownie_bites" name="brownie_bites" min="0" step="1" />
-            </div>
+  <!-- QR Code -->
+  <div class="section qr-section">
+    <h3>PayNow QR Code</h3>
+    <img src="https://drive.google.com/file/d/1iSlgJYQlKPVDACl0wk8s7pFf5y-G4if6/view?usp=drive_link" alt="PayNow QR Code" class="qr-code" />
+    <p>Scan the QR code above to pay via PayNow.</p>
+  </div>
 
-            <!-- Banana Cake -->
-            <div class="product-group">
-                <h3>Banana Cake</h3>
-                <label for="banana_9inch">9 inch ($30):</label>
-                <input type="number" id="banana_9inch" name="banana_9inch" min="0" step="1" />
+  <!-- Submit Button -->
+  <div style="text-align:center;">
+    <input type="submit" value="Submit Order" />
+  </div>
 
-                <label for="banana_chocolate">9 inch Chocolate ($33):</label>
-                <input type="number" id="banana_chocolate" name="banana_chocolate" min="0" step="1" />
+</form>
 
-                <label for="personal_banana">Personal Banana Cake ($5):</label>
-                <input type="number" id="personal_banana" name="personal_banana" min="0" step="1" />
+<script>
+  // Show/hide delivery address based on selection
+  const deliveryRadio = document.querySelector('input[value="delivery"]');
+  const pickupRadio = document.querySelector('input[value="self_pickup"]');
+  const addressDiv = document.getElementById('delivery_address');
 
-                <label for="personal_banana_chocolate">Personal Banana Cake Chocolate ($6):</label>
-                <input type="number" id="personal_banana_chocolate" name="personal_banana_chocolate" min="0" step="1" />
-            </div>
-        </div>
+  function toggleAddress() {
+    if (deliveryRadio.checked) {
+      addressDiv.style.display = 'block';
+    } else {
+      addressDiv.style.display = 'none';
+    }
+  }
 
-        <div class="section">
-            <h3>Mode of Collection</h3>
-            <label>
-                <input type="radio" name="collection_method" value="self_pickup" checked> Self Pick Up
-            </label>
-            <label>
-                <input type="radio" name="collection_method" value="delivery"> Delivery (+$10)
-            </label>
-            <div id="delivery_address" style="margin-top:10px; display:none;">
-                <label for="address">Delivery Address:</label>
-                <textarea id="address" name="address" rows="3" placeholder="Insert delivery address here..."></textarea>
-            </div>
-        </div>
+  deliveryRadio.addEventListener('change', toggleAddress);
+  pickupRadio.addEventListener('change', toggleAddress);
+  // Initialize
+  toggleAddress();
+</script>
 
-        <div class="section">
-            <h3>Payment Method</h3>
-            <label>
-                <input type="radio" name="payment_method" value="paynow" required> PayNow
-            </label>
-        </div>
-
-        <div class="section">
-            <p>After payment, please send an image of your payment and order details via WhatsApp to <strong>+65 8194 2742</strong>.</p>
-        </div>
-
-        <!-- QR Code for PayNow -->
-        <div class="section">
-            <h3>PayNow QR Code</h3>
-            <img src="YOUR_QR_CODE_IMAGE_URL_HERE" alt="PayNow QR Code" class="qr-code" />
-            <p>Scan the QR code above to pay via PayNow.</p>
-        </div>
-
-        <input type="submit" value="Submit Order" />
-    </form>
-
-    <script>
-        // Show/hide delivery address based on selection
-        const deliveryRadio = document.querySelector('input[value="delivery"]');
-        const pickupRadio = document.querySelector('input[value="self_pickup"]');
-        const addressDiv = document.getElementById('delivery_address');
-
-        function toggleAddress() {
-            if (deliveryRadio.checked) {
-                addressDiv.style.display = 'block';
-            } else {
-                addressDiv.style.display = 'none';
-            }
-        }
-
-        deliveryRadio.addEventListener('change', toggleAddress);
-        pickupRadio.addEventListener('change', toggleAddress);
-        // Initialize
-        toggleAddress();
-    </script>
 </body>
 </html>
