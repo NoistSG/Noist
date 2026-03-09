@@ -201,89 +201,13 @@
 
 <script>
 function updateTotal() {
-  let total = 0;
-
-  // Lasagna Beef
-  document.querySelectorAll('.lasagna-beef').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-  // Lasagna Chicken
-  document.querySelectorAll('.lasagna-chicken').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-  // Brownies
-  document.querySelectorAll('.brownie').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-  // Banana
-  document.querySelectorAll('.banana').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-
-  // Calculate grand total
-  let grandTotal = 0;
-  document.querySelectorAll('.total-beef, .total-chicken, .total-brownie, .total-banana').forEach(td => {
-    const text = td.textContent.replace('$', '');
-    grandTotal += parseFloat(text) || 0;
-  });
-
-  // Add delivery charge if applicable
-  const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
-  if (deliveryMethod === 'delivery') {
-    grandTotal += 10;
-  }
-
-  document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
-}
-
-<button class="submit-btn" onclick="redirectToWhatsApp()">Confirm Order</button>
-
-<script>
-function updateTotal() {
   let grandTotal = 0;
 
   // Calculate totals for each item category
-  document.querySelectorAll('.lasagna-beef').forEach(input => {
+  document.querySelectorAll('.lasagna-beef, .lasagna-chicken, .brownie, .banana').forEach(input => {
     const qty = parseInt(input.value) || 0;
     const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-  document.querySelectorAll('.lasagna-chicken').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-  document.querySelectorAll('.brownie').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
-    const totalPrice = qty * price;
-    totalCell.textContent = "$" + totalPrice.toFixed(2);
-  });
-  document.querySelectorAll('.banana').forEach(input => {
-    const qty = parseInt(input.value) || 0;
-    const price = parseFloat(input.dataset.price);
-    const totalCell = input.parentElement.nextElementSibling;
+    const totalCell = input.closest('tr').querySelector('td:last-child');
     const totalPrice = qty * price;
     totalCell.textContent = "$" + totalPrice.toFixed(2);
   });
@@ -294,7 +218,7 @@ function updateTotal() {
     grandTotal += parseFloat(text) || 0;
   });
 
-  // Add delivery charge if delivery selected
+  // Add delivery fee if delivery selected
   const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
   if (deliveryMethod === 'delivery') {
     grandTotal += 10;
@@ -337,3 +261,5 @@ function redirectToWhatsApp() {
   window.location.href = whatsappUrl;
 }
 </script>
+</body>
+</html>
