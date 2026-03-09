@@ -263,9 +263,12 @@ function redirectToWhatsApp() {
   const grandTotal = document.getElementById('grandTotal').textContent;
   const orderDetails = window.orderSummary || '';
 
-  // Generate current date in format YYYY-MM-DD
+  // Generate current date in format DDMMYY
   const today = new Date();
-  const dateString = today.toISOString().split('T')[0];
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const year = String(today.getFullYear()).slice(-2);
+  const dateString = `${day}${month}${year}`;
 
   let message = `Order Details:\n`;
   message += `Date of Purchase: ${dateString}\n`;
