@@ -263,7 +263,12 @@ function redirectToWhatsApp() {
   const grandTotal = document.getElementById('grandTotal').textContent;
   const orderDetails = window.orderSummary || '';
 
+  // Generate current date in format YYYY-MM-DD
+  const today = new Date();
+  const dateString = today.toISOString().split('T')[0];
+
   let message = `Order Details:\n`;
+  message += `Date of Purchase: ${dateString}\n`;
   message += `Name: ${decodeURIComponent(name)}\n`;
   message += `Mobile: ${decodeURIComponent(mobile)}\n`;
   message += `Email: ${decodeURIComponent(email)}\n`;
