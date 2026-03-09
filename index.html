@@ -227,9 +227,8 @@ function updateTotal() {
   document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
 }
 
-// Function to redirect to WhatsApp
 function redirectToWhatsApp() {
-  updateTotal(); // ensure totals are up-to-date
+  updateTotal(); // ensure totals and details are up-to-date
 
   const name = encodeURIComponent(document.getElementById('customerName').value);
   const mobile = encodeURIComponent(document.getElementById('mobile').value);
@@ -237,6 +236,7 @@ function redirectToWhatsApp() {
   const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
   const address = encodeURIComponent(document.getElementById('address').value);
   const grandTotal = document.getElementById('grandTotal').textContent;
+  const orderDetails = window.orderSummary || '';
 
   let message = `Order Details:\n`;
   message += `Name: ${decodeURIComponent(name)}\n`;
@@ -246,7 +246,7 @@ function redirectToWhatsApp() {
   if (deliveryMethod === 'delivery') {
     message += `Address: ${decodeURIComponent(address)}\n`;
   }
-  message += `Grand Total: $${grandTotal}\n`;
+  message += `\nOrder Items:\n${orderDetails}\n`;
   message += `Please send the payment screenshot via WhatsApp.`;
 
   const phoneNumber = '6581942742'; // Your number
@@ -267,5 +267,3 @@ document.querySelectorAll('.lasagna-beef, .lasagna-chicken, .brownie, .banana').
   input.addEventListener('input', updateTotal);
 });
 </script>
-</body>
-</html>
