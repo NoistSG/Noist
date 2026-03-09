@@ -200,10 +200,11 @@
 <button class="submit-btn" onclick="redirectToWhatsApp()">Confirm Order</button>
 
 <script>
+// Function to calculate total for each item
 function updateTotal() {
   let grandTotal = 0;
 
-  // Calculate totals for each item category
+  // For each category, calculate total
   document.querySelectorAll('.lasagna-beef, .lasagna-chicken, .brownie, .banana').forEach(input => {
     const qty = parseInt(input.value) || 0;
     const price = parseFloat(input.dataset.price);
@@ -214,24 +215,22 @@ function updateTotal() {
 
   // Sum all totals
   document.querySelectorAll('.total-beef, .total-chicken, .total-brownie, .total-banana').forEach(td => {
-    const text = td.textContent.replace('$', '');
-    grandTotal += parseFloat(text) || 0;
+    const val = td.textContent.replace('$', '');
+    grandTotal += parseFloat(val) || 0;
   });
 
-  // Add delivery fee if delivery selected
-  const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
-  if (deliveryMethod === 'delivery') {
+  // Add delivery fee if selected
+  if (document.querySelector('input[name="deliveryMethod"]:checked').value === 'delivery') {
     grandTotal += 10;
   }
 
   document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
 }
 
+// Function to redirect to WhatsApp
 function redirectToWhatsApp() {
-  // Update totals before preparing message
-  updateTotal();
+  updateTotal(); // ensure totals are up-to-date
 
-  // Gather customer info
   const name = encodeURIComponent(document.getElementById('customerName').value);
   const mobile = encodeURIComponent(document.getElementById('mobile').value);
   const email = encodeURIComponent(document.getElementById('email').value);
@@ -239,7 +238,6 @@ function redirectToWhatsApp() {
   const address = encodeURIComponent(document.getElementById('address').value);
   const grandTotal = document.getElementById('grandTotal').textContent;
 
-  // Build message
   let message = `Order Details:\n`;
   message += `Name: ${decodeURIComponent(name)}\n`;
   message += `Mobile: ${decodeURIComponent(mobile)}\n`;
@@ -251,15 +249,23 @@ function redirectToWhatsApp() {
   message += `Grand Total: $${grandTotal}\n`;
   message += `Please send the payment screenshot via WhatsApp.`;
 
-  // Your WhatsApp number (remove '+' for wa.me)
-  const phoneNumber = '6581942742';
+  const phoneNumber = '6581942742'; // Your number
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-  // Create WhatsApp URL
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-  // Redirect immediately
-  window.location.href = whatsappUrl;
+  window.location.href = url;
 }
+
+// Show/hide address box based on delivery method
+document.querySelectorAll('input[name="deliveryMethod"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    document.getElementById('addressSection').style.display = (radio.value === 'delivery') ? 'block' : 'none';
+  });
+});
+
+// Add event listeners to quantity inputs to recalculate totals
+document.querySelectorAll('.lasagna-beef, .lasagna-chicken, .brownie, .banana').forEach(input => {
+  input.addEventListener('input', updateTotal);
+});
 </script>
 </body>
 </html>
