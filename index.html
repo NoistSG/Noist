@@ -205,7 +205,6 @@ function updateTotal() {
   let grandTotal = 0;
   let orderDetails = '';
 
-  // Helper to process each input
   document.querySelectorAll('.lasagna-beef, .lasagna-chicken, .brownie, .banana').forEach(input => {
     const qty = parseInt(input.value) || 0;
     const price = parseFloat(input.dataset.price);
@@ -214,7 +213,6 @@ function updateTotal() {
     totalCell.textContent = "$" + totalPrice.toFixed(2);
 
     if (qty > 0) {
-      // Determine product name based on class and row data
       let productName = '';
       if (input.classList.contains('lasagna-beef')) {
         const sizeText = input.closest('tr').querySelector('td').innerText;
@@ -229,31 +227,38 @@ function updateTotal() {
         const sizeText = input.closest('tr').querySelector('td').innerText;
         productName = `Banana Cake (${sizeText})`;
       }
-      // Append item details
       orderDetails += `${productName}: Quantity ${qty}, Subtotal $${totalPrice.toFixed(2)}\n`;
     }
   });
 
-  // Calculate total sum
+  // Sum totals
   document.querySelectorAll('.total-beef, .total-chicken, .total-brownie, .total-banana').forEach(td => {
     const val = td.textContent.replace('$', '');
     grandTotal += parseFloat(val) || 0;
   });
 
-  // Add delivery fee if applicable
+  // Add delivery fee if delivery selected
   if (document.querySelector('input[name="deliveryMethod"]:checked').value === 'delivery') {
     grandTotal += 10;
   }
 
   document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
 
-  // Save the detailed order for WhatsApp message
   window.orderSummary = orderDetails + `\nGrand Total: $${grandTotal.toFixed(2)}`;
+}
+
+// Function to generate current date in DDMMYY format
+function getCurrentDate() {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const year = String(today.getFullYear()).slice(-2);
+  return `${day}${month}${year}`;
 }
 
 // Function to redirect to WhatsApp with order details
 function redirectToWhatsApp() {
-  updateTotal(); // ensure totals and details are current
+  updateTotal();
 
   const name = encodeURIComponent(document.getElementById('customerName').value);
   const mobile = encodeURIComponent(document.getElementById('mobile').value);
@@ -263,12 +268,7 @@ function redirectToWhatsApp() {
   const grandTotal = document.getElementById('grandTotal').textContent;
   const orderDetails = window.orderSummary || '';
 
-  // Generate current date in format DDMMYY
-  const today = new Date();
-  const day = String(today.getDate()).padStart(2, '0');
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const year = String(today.getFullYear()).slice(-2);
-  const dateString = `${day}${month}${year}`;
+  const dateString = getCurrentDate();
 
   let message = `Order Details:\n`;
   message += `Date of Purchase: ${dateString}\n`;
